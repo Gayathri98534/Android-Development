@@ -1,0 +1,283 @@
+  android:minSdkVersion="8"  File: activity_main.xml
+<RelativeLayout xmlns:androclass="http://schemas.android.com/apk/res/android"  
+    xmlns:tools="http://schemas.android.com/tools"  
+    android:layout_width="match_parent"  
+    android:layout_height="match_parent"  
+    tools:context=".MainActivity" >  
+  <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content" 
+  
+                android:layout_height="wrap_content" 
+  
+                android:layout_marginLeft="8dp" 
+  
+        android:layout_marginRight="8dp" 
+  
+        android:layout_marginTop="65dp" 
+  
+        android:hint="Phone No." 
+  
+       
+        android:inputType="phone" 
+  
+        app:layout_constraintHorizontal_bias="0.503" 
+        app:layout_constraintLeft_toLeftOf="parent" 
+        app:layout_constraintRight_toRightOf="parent" 
+        app:layout_constraintTop_toTopOf="parent" /> 
+  
+    <Button
+        android:id="@+id/button"
+  
+        
+        android:layout_width="wrap_content" 
+  
+        
+        android:layout_height="wrap_content" 
+  
+        android:layout_marginLeft="8dp" 
+        android:layout_marginRight="8dp" 
+        android:layout_marginTop="67dp" 
+  
+        android:onClick="Call" 
+  
+        android:text="DIAL" 
+  
+        
+        app:layout_constraintLeft_toLeftOf="parent" 
+        app:layout_constraintRight_toRightOf="parent" 
+        app:layout_constraintTop_toBottomOf="@+id/editText" 
+    /> 
+
+
+    <EditText  
+        android:id="@+id/editText1"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:layout_alignParentRight="true"  
+        android:layout_alignParentTop="true"  
+        android:layout_marginRight="20dp"  
+        android:ems="10" />  
+  
+    <EditText  
+        android:id="@+id/editText2"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:layout_alignLeft="@+id/editText1"  
+        android:layout_below="@+id/editText1"  
+        android:layout_marginTop="26dp"  
+        android:ems="10"  
+        android:inputType="textMultiLine" />  
+<EditText
+
+
+        android:layout_width="match_parent"
+
+
+        android:layout_height="wrap_content"
+
+
+        android:id="@+id/et_url_input"
+
+
+        android:hint="Enter the Url"
+
+
+        android:layout_margin="10dp"/>
+
+
+
+  
+    <TextView  
+        android:id="@+id/textView1"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:layout_alignBaseline="@+id/editText1"  
+        android:layout_alignBottom="@+id/editText1"  
+        android:layout_toLeftOf="@+id/editText1"  
+        android:text="Mobile No:" />  
+  
+    <TextView  
+        android:id="@+id/textView2"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:layout_alignBaseline="@+id/editText2"  
+        android:layout_alignBottom="@+id/editText2"  
+        android:layout_alignLeft="@+id/textView1"  
+        android:text="Message:" />  
+  
+    <Button  
+        android:id="@+id/button1"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:layout_alignLeft="@+id/editText2"  
+        android:layout_below="@+id/editText2"  
+        android:layout_marginLeft="34dp"  
+        android:layout_marginTop="48dp"  
+        android:text="Send SMS" />  
+<Button
+
+
+        android:layout_width="match_parent"
+
+
+        android:layout_height="wrap_content"
+
+
+        android:text="Open Web"
+
+
+        android:layout_margin="10dp"
+
+
+        android:onClick="showWebPage"/>
+
+
+
+  
+</RelativeLayout>  
+ Android-Manifest.xml
+<?xml version="1.0" encoding="utf-8"?>  
+<manifest   
+xmlns:androclass="http://schemas.android.com/apk/res/android"  
+    package="com.example.sendsms"  
+    android:versionCode="1"  
+    android:versionName="1.0" >  
+  
+    <uses-sdk  
+
+
+        android:targetSdkVersion="16" />  
+  
+    <uses-permission android:name="android.permission.SEND_SMS"/>  
+    
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>  
+<uses-permission android:name="android.permission.CALL_PHONE"/>
+
+
+    <application  
+        android:allowBackup="true"  
+        android:icon="@drawable/ic_launcher"  
+        android:label="@string/app_name"  
+        android:theme="@style/AppTheme" >  
+        <activity  
+            android:name="com.example.sendsms.MainActivity"  
+            android:label="@string/app_name" >  
+            <intent-filter>  
+                <action android:name="android.intent.action.MAIN" />  
+  
+                <category android:name="android.intent.category.LAUNCHER" />  
+            </intent-filter>  
+        </activity>  
+    </application>  
+  
+</manifest>  
+MainActivity.java
+package com.example.sendsms;  
+  
+import android.os.Bundle;  
+import android.app.Activity;  
+import android.app.PendingIntent;  
+import android.content.Intent;  
+import android.telephony.SmsManager;  
+import android.view.Menu;  
+import android.view.View;  
+import android.view.View.OnClickListener;  
+import android.widget.Button;  
+import android.widget.EditText;  
+import android.widget.Toast;  
+  
+public class MainActivity extends Activity {  
+  
+    EditText mobileno,message;  
+    Button sendsms;  EditText mEditText;
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+          
+        mobileno=(EditText)findViewById(R.id.editText1);  
+        message=(EditText)findViewById(R.id.editText2);  
+        sendsms=(Button)findViewById(R.id.button1); 
+mEditText=findViewById(R.id.et_url_input);
+ 
+          
+    //Performing action on button click  
+public void showWebPage(Viewview) {
+
+
+String myUrl= mEditText.getText().toString();
+
+
+        Uri uri=Uri.parse("https://www."+myUrl+".in");
+
+
+        Intent i=new Intent(Intent.ACTION_VIEW,uri);
+
+
+        startActivity(i);
+
+
+
+
+
+
+    }
+
+
+
+        sendsms.setOnClickListener(new OnClickListener() {  
+              
+            @Override  
+            public void onClick(View arg0) {  
+                String no=mobileno.getText().toString();  
+                String msg=message.getText().toString();  
+                  
+                //Getting intent and PendingIntent instance  
+                Intent intent=new Intent(getApplicationContext(),MainActivity.class);  
+                PendingIntent pi=PendingIntent.getActivity(getApplicationContext(), 0, intent,0);  
+                  
+                //Get the SmsManager instance and call the sendTextMessage method to send message  
+                SmsManager sms=SmsManager.getDefault();  
+                sms.sendTextMessage(no, null, msg, pi,null);  
+                  
+                Toast.makeText(getApplicationContext(), "Message Sent successfully!",  
+                    Toast.LENGTH_LONG).show();  
+            }  
+        });  
+    }  
+  
+    @Override  
+    public boolean onCreateOptionsMenu(Menu menu) {  
+        // Inflate the menu; this adds items to the action bar if it is present.  
+        getMenuInflater().inflate(R.menu.activity_main, menu);  
+        return true;  
+    }  
+      
+public  void Call(View v) 
+    { 
+EditText e = (EditText)findViewById(R.id.editText); 
+  
+        Toast.makeText(this, "clicked", Toast.LENGTH_LONG) 
+             .show(); 
+  
+        Uri u = Uri.parse("tel:" + e.getText().toString()); 
+  
+        Intent i = new Intent(Intent.ACTION_DIAL, u); 
+  
+        try
+        { 
+            startActivity(i);  
+        } 
+        catch (SecurityException s) 
+        { 
+             
+            Toast.makeText(this, "An error occurred", Toast.LENGTH_LONG) 
+                 .show(); 
+        } 
+    } 
+} 
+
+
+
+
